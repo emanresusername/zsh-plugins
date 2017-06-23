@@ -1,0 +1,3 @@
+[submodule "cowfiles/paulkaefer"]
+	path = cowfiles/paulkaefer
+	url = https://github.com/paulkaefer/cowsay-files.git
