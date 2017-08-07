@@ -18,6 +18,7 @@ function launch-chromestore-app() {
     electron --enable-logging $ELECTRON_CHROME --app-id=$app_id
 }
 
+# TODO: switch to nwjs when this works there
 function electron-chrome-vysor() {
     launch-chromestore-app gidgenkbbabolejbgbpnhbimgjbffefm
 }
