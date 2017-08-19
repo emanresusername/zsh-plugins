@@ -1,8 +1,15 @@
+export NWJS_HOME=${NWJS_HOME:-$HOME/nwjs}
 export NWJS_VERSION=${NWJS_VERSION:-0.24.3}
-export NWJS_CHROME_VERSION=${NWJS_CHROME_VERSION:-60.0.3112.90}
-export NWJS_HOME=${NWJS_HOME:-$HOME/nwjs/$NWJS_VERSION}
-export NWJS_BIN=$NWJS_HOME/bin
-export NWJS_APP=$NWJS_HOME/app/$NWJS_CHROME_VERSION
+export NWJS_BIN=$NWJS_HOME/bin/$NWJS_VERSION
+
+function nwjs-chrome-version() {
+    nwjs --version | cut -d' ' -f2
+}
+
+function nwjs-app-dir() {
+    local app_id=$1
+    echo "$NWJS_HOME/app/$app_id"
+}
 
 function nwjs-install() {
     echo "fetching nwjs v:$NWJS_VERSION"
@@ -12,19 +19,20 @@ function nwjs-install() {
     curl -s "$url" | tar -C $NWJS_BIN --strip-components=1 -xzf -
 }
 
-function nwjs-app-dir() {
+function nwjs-app-crx-url() {
     local app_id=$1
-    echo $NWJS_APP/$app_id
+    echo "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=`nwjs-chrome-version`&x=id%3D$app_id%26uc"
 }
 
 function nwjs-install-app() {
     local app_id=$1
     echo "fetching crx file for app: $app_id"
-    mkdir -p $NWJS_APP
-    local url="https://clients2.google.com/service/update2/crx?response=redirect&prodversion=$NWJS_CHROME_VERSION&x=id%3D$app_id%26uc"
-    local crx="/tmp/$app_id.crx"
+    local url="`nwjs-app-crx-url $app_id`"
+    local crx="`mktemp --suffix=.crx`"
     curl -Ls "$url" -o "$crx"
-    unzip "$crx" -d "`nwjs-app-dir $app_id`"
+    local app_dir="`nwjs-app-dir $app_id`"
+    mkdir -p "$app_dir"
+    unzip "$crx" -d "$app_dir"
     rm "$crx"
 }
 
