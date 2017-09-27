@@ -1,5 +1,5 @@
 export NWJS_HOME=${NWJS_HOME:-$HOME/nwjs}
-export NWJS_VERSION=${NWJS_VERSION:-0.24.3}
+export NWJS_VERSION=${NWJS_VERSION:-0.25.3}
 export NWJS_BIN=$NWJS_HOME/bin/$NWJS_VERSION
 
 function nwjs-chrome-version() {
