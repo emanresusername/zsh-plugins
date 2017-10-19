@@ -1,5 +1,5 @@
 export NWJS_HOME=${NWJS_HOME:-$HOME/nwjs}
-export NWJS_VERSION=${NWJS_VERSION:-0.25.3}
+export NWJS_VERSION=${NWJS_VERSION:-0.26.0}
 export NWJS_BIN=$NWJS_HOME/bin/$NWJS_VERSION
 
 function nwjs-chrome-version() {
@@ -15,7 +15,7 @@ function nwjs-install() {
     echo "fetching nwjs v:$NWJS_VERSION"
     mkdir -p $NWJS_BIN
 
-    local url="https://dl.nwjs.io/v$NWJS_VERSION/nwjs-v$NWJS_VERSION-linux-x64.tar.gz"
+    local url="https://dl.nwjs.io/v$NWJS_VERSION/nwjs-sdk-v$NWJS_VERSION-linux-x64.tar.gz"
     curl -s "$url" | tar -C $NWJS_BIN --strip-components=1 -xzf -
 }
 
