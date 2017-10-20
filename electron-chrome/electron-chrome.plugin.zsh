@@ -22,9 +22,3 @@ function launch-chromestore-app() {
 function electron-chrome-vysor() {
     launch-chromestore-app gidgenkbbabolejbgbpnhbimgjbffefm
 }
-function electron-chrome-authy() {
-    launch-chromestore-app gaedmjdfmmahhbjefcbgaolhhanlaolb
-}
-function electron-chrome-signal() {
-    launch-chromestore-app bikioccmkafdpakkkcpdbppfkghcmihk
-}
